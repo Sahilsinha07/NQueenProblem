@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 class nqueensproblem {
-    public static boolean isSafe(int rows, int columns, int[][] boards) {
+    public static boolean isSafe(int rows, int columns, char[][] boards) {
         // checking the horizontal line
         for (int j = 0; j < boards.length; j++) {
             if (boards[rows][j] == 'Q') { // agar kisi column mae already queen baithi hui hae then we will return false
@@ -16,29 +16,29 @@ class nqueensproblem {
             }
         }
         // checking for upper left
-        int r = rows;
-        for (int c = columns; c >= 0 && r >= 0; c--, r--) {
+
+        for (int c = columns, r = rows; c >= 0 && r >= 0; c--, r--) {
             if (boards[r][c] == 'Q') {
                 return false;
             }
         }
         // checking for upper right
-        r = rows;
-        for (int c = columns; c < boards.length && r >= 0; c++, r--) {
+
+        for (int c = columns, r = rows; c < boards.length && r >= 0; c++, r--) {
             if (boards[r][c] == 'Q') {
                 return false;
             }
         }
         // checking for lower left
-        r = rows;
-        for (int c = columns; c >= 0 && r < boards.length; r++, c--) {
+
+        for (int c = columns, r = rows; c >= 0 && r < boards.length; r++, c--) {
             if (boards[r][c] == 'Q') {
                 return false;
             }
         }
         // checking for lower right
-        r = rows;
-        for (int c = columns; c < boards.length && r < boards.length; c++, r--) {
+
+        for (int c = columns, r = rows; c < boards.length && r < boards.length; c++, r++) {
             if (boards[r][c] == 'Q') {
                 return false;
             }
@@ -47,8 +47,8 @@ class nqueensproblem {
 
     }
 
-    public static void saveBoard(int[][] boards, ArrayList<ArrayList<String>> allBoards) { // this function is to save
-                                                                                           // the final board
+    public static void saveBoard(char[][] boards, ArrayList<ArrayList<String>> allBoards) { // this function is to save
+                                                                                            // the final board
         String row = "";
         ArrayList<String> newboard = new ArrayList<>();
         for (int i = 0; i < boards.length; i++) {
@@ -59,13 +59,15 @@ class nqueensproblem {
                 } else {
                     row += '.';
                 }
-                newboard.add(row);
+                // newboard.add(row);
             }
-            allBoards.add(newboard);
+            newboard.add(row);
+            // allBoards.add(newboard);
         }
+        allBoards.add(newboard);
     }
 
-    public static void helper(int[][] boards, ArrayList<ArrayList<String>> allBoards, int columns) {
+    public static void helper(char[][] boards, ArrayList<ArrayList<String>> allBoards, int columns) {
         // this is our recursive function
         // first we need to place the queen in eveery columns. so ik ik karke haar rows
         // mae check karenge kidhr kidhr queen daal sakte hae
@@ -91,8 +93,8 @@ class nqueensproblem {
                                                                      // list<list<String>> and name solveNQueens and
                                                                      // argument int n.
         ArrayList<ArrayList<String>> allBoards = new ArrayList<>(); // this is where our solutions will be stored.
-        int[][] board = new int[n][n]; // this is our chess board
-        helper(board, allBoards, 0); // calling the helper function
+        char[][] boards = new char[n][n]; // this is our chess board
+        helper(boards, allBoards, 0); // calling the helper function
         return allBoards;
 
     }
